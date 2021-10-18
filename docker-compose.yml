@@ -1,10 +1,11 @@
-version: "3.9"
+version: "3.7"
 services:
   mysql-dock:
     restart: always
     container_name: mysql-dock
     build:
-      ./mysql-docker/Dockerfile
+      context: .
+      dockerfile: mysql-docker/Dockerfile
     environment:
       MYSQL_DATABASE: social-network
       MYSQL_ROOT_PASSWORD: root
@@ -17,15 +18,16 @@ services:
   social-network-app:
     restart: on-failure
     build:
-      ./social-network/Dockerfile
-    expose:
-      - "8081"
-    ports:
-    - "8081:8081"
+      context: .
+      dockerfile: social-network/Dockerfile
     environment:
       WAIT_HOST: mysql:3306
     depends_on:
       - mysql-dock
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
 
 #  mongo-dock:
 #    restart: always

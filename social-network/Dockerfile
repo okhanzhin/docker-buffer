@@ -11,4 +11,4 @@ COPY . /network
 WORKDIR network/webapp/target/
 EXPOSE 8080
 
-CMD ["java", "-jar", "webapp-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "webapp-1.0-SNAPSHOT.war"]

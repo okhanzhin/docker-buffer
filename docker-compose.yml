@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  mysql-dock:
+    restart: always
+    container_name: mysql-dock
+    build:
+      ./mysql-docker/Dockerfile
+    environment:
+      MYSQL_DATABASE: social-network
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+    - ./sql:/docker-entrypoint-initdb.d
+    ports:
+    - "6033:3306"
+
+  social-network-app:
+    restart: on-failure
+    build:
+      ./social-network/Dockerfile
+    expose:
+      - "8081"
+    ports:
+    - "8081:8081"
+    environment:
+      WAIT_HOST: mysql:3306
+    depends_on:
+      - mysql-dock
+
+#  mongo-dock:
+#    restart: always
+#    container_name: mongo-dock
+#    image: mongo
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: root
+#      MONGO_INITDB_DATABASE: social-network
+#    ports:
+#      - "27017:27017"
+#
+#  reminder-app:
+#    restart: on-failure
+#    build:
+#      ./reminder-app/Dockerfile
+#    depends_on:
+#      - mongo-dock
+#
+#  activemq:
+#    restart: always
+#    image: rmohr/activemq
+#    ports:
+#      - "61616:61616"
+#      - "8161:8161"

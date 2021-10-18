@@ -18,7 +18,7 @@ services:
   social-network-app:
     restart: on-failure
     build:
-      context: .
+      context: ./social-network
       dockerfile: social-network/Dockerfile
     environment:
       WAIT_HOST: mysql:3306

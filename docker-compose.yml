@@ -24,6 +24,8 @@ services:
       WAIT_HOST: mysql:3306
     depends_on:
       - mysql-dock
+    expose:
+      - "8080"
     ports:
       - "8080:8080"
 

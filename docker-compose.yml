@@ -47,7 +47,7 @@ services:
   reminder-app:
     restart: on-failure
     build:
-      context: ./remider-app
+      context: ./reminder-app
       dockerfile: Dockerfile
     depends_on:
       - mongo-db
@@ -57,11 +57,11 @@ services:
       SPRING_DATA_MONGODB_DATABASE: social-network
       SPRING_DATA_MONGODB_USERNAME: root
       SPRING_DATA_MONGODB_PASSWORD: root
-#      expose:
-#        - "8081"
-#      ports:
-#        - "9090:9090"
-#
+      expose:
+        - "9090"
+      ports:
+        - "9090:9090"
+
 #  activemq:
 #    restart: always
 #    image: rmohr/activemq

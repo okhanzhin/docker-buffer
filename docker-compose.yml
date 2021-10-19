@@ -1,15 +1,16 @@
 version: "3.7"
 services:
-  mysql-dock:
+  mysql-db:
     restart: always
-    container_name: mysql-dock
+    container_name: mysql-db
     build:
       context: .
       dockerfile: mysql-docker/Dockerfile
     environment:
-      MYSQL_DATABASE: social-network
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
+      - MYSQL_DATABASE=social-network
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST='%'
     volumes:
     - ./sql:/docker-entrypoint-initdb.d
     ports:
@@ -20,10 +21,13 @@ services:
     build:
       context: ./social-network
       dockerfile: Dockerfile
-    environment:
-      WAIT_HOST: mysql:3306
     depends_on:
-      - mysql-dock
+      - mysql-db
+    environment:
+      - WAIT_HOST=mysql-db:3306
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db/social-network?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
     expose:
       - "8080"
     ports:
@@ -31,7 +35,7 @@ services:
 
 #  mongo-dock:
 #    restart: always
-#    container_name: mongo-dock
+#    container_name: mongo_db
 #    image: mongo
 #    environment:
 #      MONGO_INITDB_ROOT_USERNAME: root

@@ -9,6 +9,6 @@ RUN mkdir reminder
 #COPY --from=build /usr/src/project/ /network
 COPY . /reminder
 WORKDIR reminder/
-EXPOSE 8001
+EXPOSE 9090
 
 CMD ["java", "-jar", "birthday-reminder-jar-with-dependencies.jar"]

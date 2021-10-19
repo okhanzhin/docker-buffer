@@ -18,6 +18,7 @@ services:
 
   social-network-app:
     restart: on-failure
+    container_name: social-network
     build:
       context: ./social-network
       dockerfile: Dockerfile
@@ -33,7 +34,7 @@ services:
     ports:
       - "8080:8080"
 
-  mongo-dock:
+  mongo-db:
     restart: always
     container_name: mongo-db
     image: mongo
@@ -46,6 +47,7 @@ services:
 
   reminder-app:
     restart: on-failure
+    container_name: birthday-reminder
     build:
       context: ./reminder-app
       dockerfile: Dockerfile
@@ -57,10 +59,6 @@ services:
       SPRING_DATA_MONGODB_DATABASE: social-network
       SPRING_DATA_MONGODB_USERNAME: root
       SPRING_DATA_MONGODB_PASSWORD: root
-      expose:
-        - "9090"
-      ports:
-        - "9090:9090"
 
 #  activemq:
 #    restart: always

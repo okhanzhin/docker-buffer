@@ -11,4 +11,4 @@ COPY . /reminder
 WORKDIR reminder/
 EXPOSE 9090
 
-CMD ["java", "-jar", "birthday-reminder-jar-with-dependencies.jar"]
+CMD ["java", "-jar", "service-0.0.1-SNAPSHOT.jar"]

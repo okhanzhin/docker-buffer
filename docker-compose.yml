@@ -33,23 +33,34 @@ services:
     ports:
       - "8080:8080"
 
-#  mongo-dock:
-#    restart: always
-#    container_name: mongo_db
-#    image: mongo
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: root
-#      MONGO_INITDB_ROOT_PASSWORD: root
-#      MONGO_INITDB_DATABASE: social-network
-#    ports:
-#      - "27017:27017"
-#
-#  reminder-app:
-#    restart: on-failure
-#    build:
-#      ./reminder-app/Dockerfile
-#    depends_on:
-#      - mongo-dock
+  mongo-dock:
+    restart: always
+    container_name: mongo-db
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: social-network
+    ports:
+      - "27017:27017"
+
+  reminder-app:
+    restart: on-failure
+    build:
+      context: ./remider-app
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo-db
+    environment:
+      WAIT_HOST: mongo-db:27017
+      SPRING_DATA_MONGODB_URI: mongodb://mongo-db:27017
+      SPRING_DATA_MONGODB_DATABASE: social-network
+      SPRING_DATA_MONGODB_USERNAME: root
+      SPRING_DATA_MONGODB_PASSWORD: root
+      expose:
+        - "8001"
+      ports:
+        - "8001:8001"
 #
 #  activemq:
 #    restart: always

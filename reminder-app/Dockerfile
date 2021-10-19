@@ -7,8 +7,8 @@
 FROM bellsoft/liberica-openjdk-centos:8u302-8
 RUN mkdir reminder
 #COPY --from=build /usr/src/project/ /network
-COPY . /network
-WORKDIR network/webapp/target/
-EXPOSE 8081
+COPY . /reminder
+WORKDIR reminder/
+EXPOSE 8001
 
-CMD ["java", "-jar", "webapp-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "birthday-reminder-jar-with-dependencies.jar"]

@@ -60,8 +60,8 @@ services:
 #      SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin
 #      SPRING_DATA_MONGODB_URI: mongodb://mongo-db:27017
       SPRING_DATA_MONGODB_DATABASE: social-network
-      SPRING_DATA_MONGODB_USERNAME:
-      SPRING_DATA_MONGODB_PASSWORD: admin
+      SPRING_DATA_MONGODB_USERNAME: root
+      SPRING_DATA_MONGODB_PASSWORD: root
 
 #  activemq:
 #    restart: always

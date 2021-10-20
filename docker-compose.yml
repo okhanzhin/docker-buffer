@@ -59,8 +59,8 @@ services:
       TZ: Europe/Moscow
       WAIT_HOST: mongo-db:27017
       SPRING_DATA_MONGODB_HOST: mongo-db
-      SPRING_DATA_MONGODB_USERNAME: root
-      SPRING_DATA_MONGODB_PASSWORD: root
+      SPRING_DATA_MONGODB_USERNAME: admin
+      SPRING_DATA_MONGODB_PASSWORD: admin
       SPRING_ACTIVEMQ_BROKERURL: tcp://activemq:61616
 
   activemq:

@@ -65,6 +65,7 @@ services:
 
   activemq:
     restart: always
+    container_name: activemq-broker
     image: rmohr/activemq:lastest
     ports:
       - "61616:61616"

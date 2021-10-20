@@ -16,7 +16,7 @@ services:
     ports:
     - "6033:3306"
 
-  social-network-app:
+  social-network:
     restart: on-failure
     container_name: social-network
     build:
@@ -25,10 +25,12 @@ services:
     depends_on:
       - mysql-db
     environment:
+      TZ: Europe/Moscow
       WAIT_HOST: mysql-db:3306
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db/social-network?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_ACTIVEMQ_BROKERURL: tcp://activemq:61616
     expose:
       - "8080"
     ports:
@@ -45,7 +47,7 @@ services:
     ports:
       - "27017:27017"
 
-  reminder-app:
+  reminder:
     restart: on-failure
     container_name: birthday-reminder
     build:
@@ -54,18 +56,20 @@ services:
     depends_on:
       - mongo-db
     environment:
+      TZ: Europe/Moscow
       WAIT_HOST: mongo-db:27017
       SPRING_DATA_MONGODB_HOST: mongo-db
-#      SPRING_DATA_MONGODB_PORT: 27017
-#      SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin
-#      SPRING_DATA_MONGODB_URI: mongodb://mongo-db:27017
-      SPRING_DATA_MONGODB_DATABASE: social-network
       SPRING_DATA_MONGODB_USERNAME: root
       SPRING_DATA_MONGODB_PASSWORD: root
+      SPRING_ACTIVEMQ_BROKERURL: tcp://activemq:61616
 
-#  activemq:
-#    restart: always
-#    image: rmohr/activemq
-#    ports:
-#      - "61616:61616"
-#      - "8161:8161"
+  activemq:
+    restart: always
+    image: rmohr/activemq:lastest
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    volumes:
+    - ./activemq/activemq.xml:/conf/activemq.xml
+    environment:
+      TZ: Europe/Moscow

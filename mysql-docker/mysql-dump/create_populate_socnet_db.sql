@@ -1,4 +1,7 @@
--- noinspection SqlNoDataSourceInspectionForFile
+# noinspection SqlNoDataSourceInspectionForFile
+
+CREATE DATABASE social_network;
+USE social_network;
 
 create table accounts
 (

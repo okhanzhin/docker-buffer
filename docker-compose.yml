@@ -7,12 +7,12 @@ services:
       context: .
       dockerfile: mysql-docker/Dockerfile
     environment:
-      MYSQL_DATABASE: social-network
+      MYSQL_DATABASE: social_network
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
     volumes:
-    - ./sql:/docker-entrypoint-initdb.d
+      - ./mysql-dump:/docker-entrypoint-initdb.d
     ports:
     - "6033:3306"
 

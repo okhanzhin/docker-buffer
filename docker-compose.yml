@@ -28,10 +28,10 @@ services:
     environment:
       TZ: Europe/Moscow
       WAIT_HOST: mysql-db:3306
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db/social-network?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db/social_network?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      SPRING_DATASOURCE_TOMCAT_URL: jdbc:mysql://mysql-db/social-network?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_TOMCAT_URL: jdbc:mysql://mysql-db/social_network?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_TOMCAT_USERNAME: root
       SPRING_DATASOURCE_TOMCAT_PASSWORD: root
       SPRING_ACTIVEMQ_BROKERURL: tcp://activemq:61616
